@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>个人安全资料库</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>个人安全资料库</h1>
+      <p class="subtitle">输入 一级密码 浏览；输入 二级密码 编辑与保存</p>
+    </header>
+
+    <!-- Password panel -->
+    <div id="pw-panel" class="card">
+      <label>请输入密码：</label>
+      <div class="pw-row">
+        <input id="pw-input" type="password" placeholder="输入密码">
+        <button id="pw-btn">进入</button>
+      </div>
+      <p id="pw-msg" class="error"></p>
+      <p class="hint">（默认：查看密码 <code>1234</code>；编辑密码 <code>9999</code> —— 建议上生产前修改）</p>
+    </div>
+
+    <!-- Main layout (hidden before login) -->
+    <div id="main-ui" class="hidden">
+
+      <!-- Left: search + folders -->
+      <aside class="sidebar card">
+        <div class="search">
+          <input id="search-input" type="text" placeholder="搜索关键词...">
+          <button id="search-btn">搜索</button>
+          <button id="reset-search" title="显示全部">重置</button>
+        </div>
+
+        <div class="folders">
+          <div class="folders-header">
+            <h3>文件夹</h3>
+            <button id="add-folder-btn" title="新增文件夹">＋ 新建</button>
+          </div>
+          <ul id="folder-list"></ul>
+        </div>
+
+        <div class="actions">
+          <button id="export-btn">导出数据（JSON）</button>
+          <button id="import-btn">从 JSON 导入</button>
+          <input id="import-file" type="file" accept="application/json" class="hidden">
+          <button id="clear-btn" title="清空本地数据">清空本地数据</button>
+          <p class="note">数据储存在浏览器 localStorage，仅在此浏览器有效。</p>
+        </div>
+      </aside>
+
+      <!-- Right: content / editor -->
+      <main class="card content-area">
+        <div id="empty-tip" class="empty">请从左侧选择或新建一个文件夹。</div>
+
+        <div id="folder-view" class="hidden">
+          <div class="folder-title-row">
+            <h2 id="folder-title"></h2>
+            <div>
+              <button id="rename-folder-btn">重命名</button>
+              <button id="delete-folder-btn">删除</button>
+            </div>
+          </div>
+
+          <section class="display">
+            <h3>文字内容</h3>
+            <div id="text-display" class="text-display"></div>
+          </section>
+
+          <section class="images-section">
+            <h3>图片</h3>
+            <div id="image-display" class="image-display"></div>
+          </section>
+
+          <hr>
+
+          <section id="editor" class="hidden editor">
+            <h3>编辑（仅二级密码可见）</h3>
+            <label>内容（可搜索）</label>
+            <textarea id="text-input" placeholder="在此输入或编辑文字..."></textarea>
+
+            <div class="upload-row">
+              <label>上传图片（单张或多张）</label>
+              <input id="img-input" type="file" accept="image/*" multiple>
+              <button id="add-img-btn">上传并保存</button>
+            </div>
+
+            <div class="editor-actions">
+              <button id="save-btn">保存</button>
+              <button id="cancel-edit-btn">取消</button>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <footer>
+      <p>建议：上线上前请修改 `js/app.js` 中默认密码并定期备份导出 JSON。</p>
+    </footer>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
